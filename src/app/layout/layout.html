@@ -1,0 +1,18 @@
+<div class="layout">
+
+  <aside class="sidebar">
+    <h2>IMS</h2>
+
+    <ul>
+      <li routerLink="/dashboard" routerLinkActive="active">Dashboard</li>
+      <li routerLink="/inventory" routerLinkActive="active">Inventory</li>
+      <li routerLink="/categories" routerLinkActive="active">Categories</li>
+      <li (click)="logout()">Logout</li>
+    </ul>
+  </aside>
+
+  <main class="main-content">
+    <router-outlet></router-outlet>
+  </main>
+
+</div>

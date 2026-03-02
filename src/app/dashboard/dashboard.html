@@ -1,0 +1,50 @@
+<header class="topbar">
+  <h2>Dashboard</h2>
+  <div class="user-info">
+    Welcome, Admin
+  </div>
+</header>
+
+<section class="stats-section">
+  <div class="card">
+    <h3>Total Products</h3>
+    <p>{{ totalProducts }}</p>
+  </div>
+
+  <div class="card">
+    <h3>Low Stock</h3>
+    <p>{{ lowStock }}</p>
+  </div>
+
+  <div class="card">
+    <h3>Categories</h3>
+    <p>{{ categories }}</p>
+  </div>
+
+  <div class="card">
+    <h3>Total Sales</h3>
+    <p>{{ totalSales }}</p>
+  </div>
+</section>
+
+<section class="recent-section">
+  <h3>Recent Inventory</h3>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Category</th>
+        <th>Stock</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let product of products">
+        <td>{{ product.name }}</td>
+        <td>{{ product.category }}</td>
+        <td>{{ product.stock }}</td>
+      </tr>
+    </tbody>
+  </table>
+</section>

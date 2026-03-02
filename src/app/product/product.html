@@ -1,0 +1,47 @@
+<div class="dashboard-header">
+  <h2>
+    <i class="fas fa-box"></i> Inventory Dashboard
+  </h2>
+
+  <button (click)="logout()" class="btn-logout">
+    <i class="fas fa-sign-out-alt"></i> Logout
+  </button>
+</div>
+
+<hr>
+<h3>Add New Product</h3>
+<div>
+  <input
+    type="text"
+    placeholder="Product Name"
+    [(ngModel)]="newName">
+  <input
+    type="number"
+    placeholder="Price"
+    [(ngModel)]="newPrice">
+  <button (click)="addProduct()" class="btn-add">
+    <i class="fas fa-plus"></i> Add 
+  </button>
+  </div>
+  <br>
+<table border ="1" width="100%">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let product of products; let i = index">
+      <td>{{ product.name }}</td>
+      <td>{{ product.price }}</td>
+      <td>
+        <button (click)="deleteProduct(i)" class="btn-delete">
+          <i class="fas fa-trash"></i> Delete
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
