@@ -12,14 +12,26 @@ export interface Product {
 })
 export class InventoryService {
 
-  products: Product[] = [
+  private products: Product[] = [
     { name: 'Laptop', category: 'Electronics', stock: 12, price: 50000 },
     { name: 'Keyboard', category: 'Accessories', stock: 30, price: 800 },
     { name: 'Mouse', category: 'Accessories', stock: 5, price: 500 },
     { name: 'Monitor', category: 'Electronics', stock: 3, price: 15000 }
   ];
 
-  getProducts() {
+  getProducts(): Product[] {
     return this.products;
+  }
+
+  addProduct(product: Product) {
+    this.products.push(product);
+  }
+
+  updateProduct(index: number, product: Product) {
+    this.products[index] = product;
+  }
+
+  deleteProduct(index: number) {
+    this.products.splice(index, 1);
   }
 }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ProductService } from './product.service';
+import { InventoryService, Product } from '../../core/services/inventory.service';
 
 
 @Component({
@@ -13,9 +13,9 @@ import { ProductService } from './product.service';
   styleUrls: ['./product.css']
 
 })
-export class Product implements OnInit {
+export class ProductComponent implements OnInit {
 
-  products: { name: string; price: number }[] = [];
+  products: Product[] = [];
   totalValue: number = 0;
   searchText: string = '';
 
@@ -27,49 +27,46 @@ export class Product implements OnInit {
 
   constructor(
     private router: Router,
-    private productService: ProductService
+    private inventoryService: InventoryService
   ) {}
    
   testClick() {
     console.log("DELETE BUTTON CLICKED");
   }
   ngOnInit(): void {
-    this.products = this.productService.getProducts();
+    this.products = this.inventoryService.getProducts();
       this.updateTotalValue();
   }
 
   addProduct() {
     if (!this.newName || this.newPrice === null) return;
 
-    if (this.editIndex !== null) {
-      this.productService.updateProduct(this.editIndex, {
-        name: this.newName,
-        price: this.newPrice
-      });
-      this.editIndex = null;
-    } else {
-      this.productService.addProduct({
-        name: this.newName,
-        price: this.newPrice
-      });
-    }
-        this.products = this.productService.getProducts();
-        this.updateTotalValue();
-      
-    
+    const newProduct: Product = {
+      name: this.newName,
+      category: 'General',
+      stock: 1,
+      price: this.newPrice
+    };
 
-    this.products = this.productService.getProducts();
+    if (this.editIndex !== null) {
+      this.inventoryService.updateProduct(this.editIndex, newProduct);
+      this.editIndex = null;
+    } else{
+      this.inventoryService.addProduct(newProduct);
+   }
+        this.products = this.inventoryService.getProducts();
+        this.updateTotalValue();
+    
 
     this.newName = '';
     this.newPrice = null;
   }
 
   deleteProduct(index: number) {
-    console.log("DELETE BUTTON CLICKED", index);
 
     if (confirm('Are you sure you want to delete this product?')) {
-      this.products.splice(index, 1);
-    this.productService.saveProducts(this.products);
+      this.inventoryService.deleteProduct(index);
+      this.products = this.inventoryService.getProducts();
     this.updateTotalValue();
   }
 }

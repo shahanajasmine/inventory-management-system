@@ -1,12 +1,12 @@
 import { Component, signal } from '@angular/core';
-import { Product } from "./product/product";
+import { ProductComponent } from "./features/product/product";
 import { RouterOutlet } from '@angular/router';
 import { Router } from '@angular/router';
 import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-root',
-  imports: [Product, RouterOutlet, NgIf],
+  imports: [ RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
