@@ -2,12 +2,21 @@
 
   <aside class="sidebar">
     <h2>IMS</h2>
+    
 
     <ul>
-      <li routerLink="/dashboard" routerLinkActive="active">Dashboard</li>
-      <li routerLink="/inventory" routerLinkActive="active">Inventory</li>
-      <li routerLink="/categories" routerLinkActive="active">Categories</li>
-      <li (click)="logout()">Logout</li>
+      <li routerLink="/dashboard" routerLinkActive="active">
+      <i class="fa-solid fa-chart-line"></i>
+      <span> Dashboard</span></li>
+      <li routerLink="/inventory" routerLinkActive="active">
+        <i class="fa-solid fa-box"></i>
+       <span> Inventory</span></li>
+      <li routerLink="/categories" routerLinkActive="active">
+        <i class="fa-solid fa-tags"></i>
+        <span>Categories</span></li>
+      <li (click)="logout()">
+        <i class="fa-solid fa-right-from-bracket"></i>
+      <span>  Logout </span> </li>
     </ul>
   </aside>
 

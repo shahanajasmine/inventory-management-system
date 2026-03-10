@@ -1,0 +1,43 @@
+h2 {
+    margin-bottom: 20px;
+}
+.category-form {
+    margin-bottom: 20px;
+}
+.category-form input{
+    padding: 8px;
+    width: 250px;
+    margin-right: 10px;
+
+}
+.category-form button {
+    padding: 8px 14px;
+    background-color: #4caf50;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+.category-form button:hover {
+    background-color: #45a049;
+}
+.category-list {
+    max-width: 400px;
+
+}
+.category-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 8px;
+    background: #f4f4;
+    border-radius: 6px;
+
+}
+.category-item button {
+    background: red;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    cursor: pointer;
+}

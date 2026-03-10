@@ -20,10 +20,12 @@ export class ProductComponent implements OnInit {
   searchText: string = '';
 
   newName: string = '';
+  newCategory: string = '';
+  newStock: number | null = null;
   newPrice: number | null = null;
   editIndex: number | null = null;
-  editingProduct: any = null;
-  productToDelete: any = null;
+  editingProduct: Product | null = null;
+  productToDelete: Product | null = null;
 
   constructor(
     private router: Router,
@@ -42,9 +44,10 @@ export class ProductComponent implements OnInit {
     if (!this.newName || this.newPrice === null) return;
 
     const newProduct: Product = {
+      id: Date.now(),
       name: this.newName,
-      category: 'General',
-      stock: 1,
+      category: this.newCategory || 'General',
+      stock: this.newStock ?? 2,
       price: this.newPrice
     };
 
@@ -59,12 +62,14 @@ export class ProductComponent implements OnInit {
     
 
     this.newName = '';
+    this.newCategory = '';
+    this.newStock = null;
     this.newPrice = null;
   }
 
   deleteProduct(index: number) {
 
-    if (confirm('Are you sure you want to delete this product?')) {
+    if (confirm(' Delete this product permanently?')) {
       this.inventoryService.deleteProduct(index);
       this.products = this.inventoryService.getProducts();
     this.updateTotalValue();
@@ -73,8 +78,11 @@ export class ProductComponent implements OnInit {
   
 
   editProduct(index: number) {
+    const product = this.products[index];
+
     this.newName = this.products[index].name;
     this.newPrice = this.products[index].price;
+    this.newCategory = this.products[index].category;
     this.editIndex = index;
     
   }
@@ -93,11 +101,12 @@ export class ProductComponent implements OnInit {
     this.productToDelete = null;
   }
   updateTotalValue(): void {
-    this.totalValue = this.products.reduce((total, item) => total + item.price, 0);
+    this.totalValue = this.products.reduce((total, item) => total + item.price * item.stock, 0);
   }
   get filteredProducts() {
     return this.products.filter(product =>
-      product.name.toLowerCase().includes(this.searchText.toLowerCase())
+      product.name.toLowerCase().includes(this.searchText.toLowerCase()) ||
+      product.category.toLowerCase().includes(this.searchText.toLowerCase())
     );
   }
   logout() {

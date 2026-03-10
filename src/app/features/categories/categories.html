@@ -1,1 +1,18 @@
-<p>categories works!</p>
+<h2>Categories</h2>
+
+<div class="category-form">
+  <input
+    type="text"
+    [(ngModel)]="newCategoryName"
+    placeholder="Enter category name"
+  />
+
+  <button (click)="addCategory()">Add Category</button>
+</div>
+
+<div class="category-list">
+  <div class="category-item" *ngFor="let c of categories">
+    <span>{{ c.name }}</span>
+    <button (click)="deleteCategory(c.id)">Delete</button>
+  </div>
+</div>

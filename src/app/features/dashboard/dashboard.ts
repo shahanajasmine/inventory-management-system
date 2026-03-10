@@ -32,8 +32,7 @@ export class Dashboard implements OnInit {
   }
 
   ngOnInit(): void {
-    this.products = this.inventoryService.getProducts() || [];
-    this.calculateStats();
+    this.loadStats();
   }
   loadStats(): void{
     this.products = this.inventoryService.getProducts() || [];
